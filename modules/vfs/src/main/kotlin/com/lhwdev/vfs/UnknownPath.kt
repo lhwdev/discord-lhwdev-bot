@@ -2,6 +2,9 @@ package com.lhwdev.vfs
 
 
 public interface UnknownPath : Path {
+	// IO
+	public suspend fun asAnyPath(): AnyPath
+	
 	// File IO
 	public suspend fun asFile(): FilePath
 	

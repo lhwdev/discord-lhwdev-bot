@@ -3,7 +3,7 @@ package com.lhwdev.vfs
 
 public interface FileSystem {
 	// Basic information
-	public val separator: Char
+	public val separator: String
 	
 	
 	// Navigation

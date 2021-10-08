@@ -16,7 +16,5 @@ kotlin {
 
 
 dependencies {
-	implementation(project(":vfs"))
-	
 	implementation(compose.runtime)
 }

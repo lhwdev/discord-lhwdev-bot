@@ -16,7 +16,8 @@ kotlin {
 
 
 dependencies {
-	implementation(project(":vfs"))
+	implementation(project(":core"))
 	
+	implementation(libs.kord)
 	implementation(compose.runtime)
 }

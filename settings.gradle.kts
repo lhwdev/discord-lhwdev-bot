@@ -16,13 +16,22 @@ includeBuild("includeBuild")
 
 fun includeModules(path: String, prefix: String, vararg projectPaths: String) {
 	for(projectPath in projectPaths) {
-		val realPath = "$prefix:$projectPath"
+		val realPath = "$prefix$projectPath"
 		include(realPath)
 		
 		val project = project(realPath)
 		
-		project.projectDir = File(path, projectPath)
+		project.projectDir = File(path, projectPath.drop(1).replace(':', '/'))
 	}
 }
 
-includeModules(path = "modules", prefix = "", "core", "utils", "vfs")
+includeModules(
+	path = "modules",
+	prefix = "",
+	
+	":bot",
+	
+	":core", ":utils", ":vfs",
+	
+	":backend:discord"
+)
