@@ -3,6 +3,8 @@ package com.lhwdev.bot.structure
 import com.lhwdev.bot.Client
 
 
-interface BotEntity {
-	val client: Client
+public interface BotEntity {
+	public val id: EntityId<*>
+	
+	public val client: Client
 } 

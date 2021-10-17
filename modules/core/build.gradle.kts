@@ -12,6 +12,8 @@ plugins {
 
 kotlin {
 	setup()
+	
+	explicitApi()
 }
 
 
@@ -19,4 +21,5 @@ dependencies {
 	implementation(project(":vfs"))
 	
 	implementation(compose.runtime)
+	implementation(libs.serialization.core)
 }

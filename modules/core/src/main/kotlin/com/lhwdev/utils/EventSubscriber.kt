@@ -1,16 +1,25 @@
 package com.lhwdev.utils
 
-import kotlinx.coroutines.flow.Flow
-import kotlin.reflect.KClass
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
-interface EventSubscriber<B : Any> {
-	fun <T : B> on(type: KClass<T>): Flow<T>
-	
-	fun <T : B> on(type: KClass<T>, listener: suspend (T) -> Unit): SubscribeHandle
+public interface EventSubscriber<T> {
+	public val eventFlow: SharedFlow<T>
 }
 
 
-interface SubscribeHandle {
-	fun unsubscribe()
+public interface SubscribeHandle {
+	public fun unsubscribe()
+}
+
+
+public inline fun <reified T> EventSubscriber<T>.on(scope: CoroutineScope, noinline block: suspend (T) -> Unit) {
+	eventFlow
+		.filterIsInstance<T>()
+		.onEach(block)
+		.launchIn(scope)
 }

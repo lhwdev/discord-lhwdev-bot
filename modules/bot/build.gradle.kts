@@ -16,5 +16,8 @@ kotlin {
 
 
 dependencies {
+	implementation(project(":core"))
+	implementation(project(":backend:discord"))
 	implementation(compose.runtime)
+	implementation(libs.serialization.core)
 }

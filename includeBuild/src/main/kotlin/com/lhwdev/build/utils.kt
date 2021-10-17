@@ -23,6 +23,8 @@ fun KotlinProjectExtension.setupCommon() {
 				enableLanguageFeature("InlineClasses")
 				optIn("kotlin.RequiresOptIn")
 				optIn("kotlin.ExperimentalUnsignedTypes")
+				optIn("kotlin.time.ExperimentalTime")
+				optIn("kotlin.contract.ExperimentalContracts")
 			}
 		}
 		
