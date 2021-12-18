@@ -10,6 +10,7 @@ import com.lhwdev.bot.command.parameter.CommandParameter
 import com.lhwdev.bot.command.parameter.CommandParameterImpl
 import com.lhwdev.bot.command.parameter.ParameterType
 import com.lhwdev.bot.command.scope.InvokeScope
+import com.lhwdev.bot.command.scope.UpdatableScope
 import com.lhwdev.bot.localization.LocaleText
 import kotlinx.serialization.KSerializer
 import kotlin.contracts.ExperimentalContracts
@@ -73,20 +74,32 @@ public open class CommandBuilder<T>(
 	}
 	
 	
-	public fun <T> parameter(
+	public fun <T> mainParameter(
+		name: String,
 		type: ParameterType<T>,
 		description: LocaleText? = null
 	): CommandParameter<T> {
-		val parameter = CommandParameterImpl(type, description)
+		val parameter = CommandParameterImpl(name, type, description, isMainParameter = true)
 		parameters += parameter
 		return parameter
 	}
 	
 	public fun <T> parameter(
+		name: String,
+		type: ParameterType<T>,
+		description: LocaleText? = null
+	): CommandParameter<T> {
+		val parameter = CommandParameterImpl(name, type, description)
+		parameters += parameter
+		return parameter
+	}
+	
+	public fun <T> parameter(
+		name: String,
 		type: ParameterType<T>,
 		default: T,
 		description: LocaleText
-	): CommandParameter<T> = parameter(type, description)
+	): CommandParameter<T> = parameter(name, type, description)
 	
 	
 	public fun <T> config(serializer: KSerializer<T>): MutableState<T> = TODO()
@@ -119,6 +132,12 @@ public open class CommandBuilder<T>(
 	@PublishedApi
 	internal open fun build(): Command<T> = object : Command<T> {
 		
+	}
+}
+
+public inline fun CommandBuilder<Unit>.onUpdatableInvoke(noinline block: suspend UpdatableScope.() -> Unit) {
+	onInvoke {
+		updatable(block)
 	}
 }
 

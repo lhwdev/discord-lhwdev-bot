@@ -7,6 +7,7 @@ import com.lhwdev.bot.command.interceptor.DefaultInterceptor
 import com.lhwdev.bot.command.parameter.ParameterTypes
 import com.lhwdev.bot.command.scope.InvokeScope
 import com.lhwdev.bot.command.scope.replyEmbed
+import com.lhwdev.bot.localization.localeText
 import com.lhwdev.bot.structure.user.User
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -46,10 +47,10 @@ val banCommand = botCommand(id = "com.lhwdev.bot.commands.basic:ban") {
 	)
 	
 	val user by parameter(
-		type = ParameterTypes.User(),
+		type = ParameterTypes.Mention.User,
 		description = localeText {
-			korean = "벤때릴 사용자 이름"
-			english = "The name which you will ban"
+			korean = "벤때릴 사용자"
+			english = "The user which you will ban"
 		}
 	)
 	

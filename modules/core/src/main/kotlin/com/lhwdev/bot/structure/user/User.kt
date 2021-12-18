@@ -31,7 +31,7 @@ public interface UserContext {
 public interface User : BotEntity {
 	/// Information
 	
-	override val id: EntityId<User>
+	override val id: UserId
 	
 	public val context: UserContext
 	
@@ -46,6 +46,9 @@ public interface User : BotEntity {
 	public val displayName: String
 	
 	public val profileImage: Path
+	
+	
+	public val mention: String
 	
 	
 	public suspend fun dmChannel(): DmChannel?

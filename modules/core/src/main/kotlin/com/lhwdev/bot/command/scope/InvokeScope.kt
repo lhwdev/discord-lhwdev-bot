@@ -5,6 +5,7 @@ import com.lhwdev.bot.command.Command
 import com.lhwdev.bot.command.Subcommand
 import com.lhwdev.bot.command.parameter.CommandParameter
 import com.lhwdev.bot.context.ChannelContext
+import com.lhwdev.bot.context.GuildContext
 import com.lhwdev.bot.structure.chat.EmbedBuilder
 import com.lhwdev.bot.structure.chat.Message
 import com.lhwdev.bot.structure.chat.MessageBuilder
@@ -12,7 +13,7 @@ import com.lhwdev.bot.structure.chat.embed
 
 
 
-public interface InvokeScope : ChannelContext {
+public interface InvokeScope : ChannelContext, GuildContext {
 	public val selfCommand: Command<*>
 	
 	public fun <T> parameterFor(parameter: CommandParameter<T>): T
@@ -24,9 +25,9 @@ public interface InvokeScope : ChannelContext {
 	public suspend fun reply(message: Message)
 	
 	
-	public fun updatable(block: UpdatableScope.() -> Unit)
+	public suspend fun updatable(block: suspend UpdatableScope.() -> Unit)
 	
-	public fun <R> updatableState(block: UpdatableScope.() -> R): State<R>
+	public suspend fun <R> updatableState(block: suspend UpdatableScope.() -> R): State<R>
 }
 
 

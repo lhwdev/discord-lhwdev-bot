@@ -1,6 +1,6 @@
 package com.lhwdev.bot.backend
 
 
-interface BotBackend {
-	val unsafe: Unsafe
+public interface BotBackend {
+	public val unsafe: Unsafe
 }

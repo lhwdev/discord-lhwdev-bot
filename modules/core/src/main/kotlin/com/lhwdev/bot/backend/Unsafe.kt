@@ -5,8 +5,8 @@ import com.lhwdev.bot.structure.chat.Embed
 import com.lhwdev.bot.structure.chat.Message
 
 
-interface Unsafe {
-	fun createMessage(
+public interface Unsafe {
+	public fun createMessage(
 		content: String = "",
 		embeds: List<Embed> = emptyList(),
 		components: List<Component> = emptyList()
